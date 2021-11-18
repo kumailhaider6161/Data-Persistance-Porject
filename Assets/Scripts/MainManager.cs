@@ -6,6 +6,7 @@ using UnityEngine.UI;
 
 public class MainManager : MonoBehaviour
 {
+    public Text nameText;
     public Brick BrickPrefab;
     public int LineCount = 6;
     public Rigidbody Ball;
@@ -15,6 +16,7 @@ public class MainManager : MonoBehaviour
     
     private bool m_Started = false;
     private int m_Points;
+    private int storedScore;
     
     private bool m_GameOver = false;
 
@@ -36,6 +38,8 @@ public class MainManager : MonoBehaviour
                 brick.onDestroyed.AddListener(AddPoint);
             }
         }
+      
+
     }
 
     private void Update()
@@ -60,6 +64,9 @@ public class MainManager : MonoBehaviour
                 SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
             }
         }
+        nameText.text = "Name:" + MenuManager.name + "  " + storedScore;
+
+
     }
 
     void AddPoint(int point)
@@ -72,5 +79,6 @@ public class MainManager : MonoBehaviour
     {
         m_GameOver = true;
         GameOverText.SetActive(true);
+        storedScore = m_Points;
     }
 }
